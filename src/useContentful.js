@@ -6,10 +6,12 @@ export default function useContentful() {
     accessToken: "-pnmSaf6zCMRu7wHMDVxXcgremsSGvRADeGgQs9Y3po",
   });
 
-  const getData = async (search = "literature") => {
+  const getData = async (contentType) => {
+    console.log(contentType);
+    if (!contentType) return;
     try {
       const entries = await client.getEntries({
-        content_type: search,
+        content_type: contentType,
         select: "fields",
       });
       return entries;

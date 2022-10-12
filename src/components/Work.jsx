@@ -1,5 +1,6 @@
 import React from "react";
 export default function Work({ result }) {
+  // console.log(result);
   return (
     <div>
       <h2>{result.title}</h2>
