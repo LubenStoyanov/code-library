@@ -1,11 +1,14 @@
-export default function List({ anwsers }) {
-  // console.log(anwsers[0].fields.title);
-  const listAnwsers = anwsers.map((anwser) => (
-    <li key={anwser.sys.id}>anwser: {anwser.fields.title}</li>
+import Work from "./Work";
+import { v4 as uuidv4 } from "uuid";
+
+export default function List({ results }) {
+  const listResults = results.map((result) => (
+    // <li key={result.sys.id}>{result.fields.title}</li>
+    <Work key={uuidv4()} result={result} />
   ));
   return (
     <div>
-      <ol>{listAnwsers}</ol>
+      <ul>{listResults}</ul>
     </div>
   );
 }
