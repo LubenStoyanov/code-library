@@ -2,27 +2,18 @@ import { useEffect, useState } from "react";
 import useContentful from "./useContentful";
 import "./App.css";
 import Searchbar from "./components/Searchbar";
+import List from "./components/List";
 import Literature from "./components/Literature";
 import Music from "./components/Music";
+import Art from "./components/Art";
 
 function App() {
+  const [contentType, setContentType] = useState("");
   const [results, setResults] = useState([]);
   const [search, setSearch] = useState("");
   const [firstLoad, setFirstLoad] = useState(true);
   const { getData } = useContentful();
 
-  // useEffect(() => {
-  //   const handleData = async () => {
-  //     try {
-  //       const response = await getData();
-  //       setResults(response.items);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   handleData();
-  // }, []);
   useEffect(() => {
     if (firstLoad) {
       setFirstLoad(false);
@@ -30,7 +21,8 @@ function App() {
     }
     const handleData = async () => {
       try {
-        const data = await getData(search);
+        const data = await getData(search, contentType);
+        console.log(data);
         setResults(data.items);
       } catch (error) {
         console.log("my error", error);
@@ -43,11 +35,13 @@ function App() {
   return (
     <div className="App">
       <h1>Fine Arts</h1>
-      <Searchbar setSearch={setSearch} />
       <div style={{ display: "flex", gap: 100 }}>
-        <Literature />
-        <Music />
+        {/* <List results={results} contentType={contentType} /> */}
+        <Literature results={results} />
+        <Music results={results} />
+        <Art />
       </div>
+      <Searchbar setSearch={setSearch} setContentType={setContentType} />
     </div>
   );
 }
